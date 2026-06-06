@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emotional-model-fls"
+version = "0.1.0"
+description = "Fuzzy-logic emotional model for robot affective state generation."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.23",
+    "scikit-fuzzy>=0.4.2",
+]
+
+[project.optional-dependencies]
+config = [
+    "PyYAML>=6",
+]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "PyYAML>=6",
+]
+
+[project.scripts]
+emotional-model-fls = "emotional_model_fls.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+emotional_model_fls = ["example_specs.yaml"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]

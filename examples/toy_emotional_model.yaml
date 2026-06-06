@@ -1,0 +1,248 @@
+{
+  "metadata": {"name": "Toy Emotional Model", "privacy": "Demo values only. These are intentionally not the original research rules.", "description": "Synthetic integration demo: evenly spaced membership functions and constant-output rules. This is not the calibrated research model."},
+  "variables": {
+    "battery": {
+      "control_name": "_battery",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "antennas": {
+      "control_name": "_antennas",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "antennas_frequency": {
+      "control_name": "_antennas_frequency",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 2.768, 11.696]},
+        {"name": "DEMO_2", "kind": "trap", "points": [4.304, 13.232, 16, 16]}
+      ]
+    },
+    "speech": {
+      "control_name": "_speech",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "light": {
+      "control_name": "_light",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 0.692, 2.924]},
+        {"name": "DEMO_2", "kind": "tri", "points": [1.076, 4.0, 6.924]},
+        {"name": "DEMO_3", "kind": "tri", "points": [5.076, 8.0, 10.924]},
+        {"name": "DEMO_4", "kind": "tri", "points": [9.076, 12.0, 14.924]},
+        {"name": "DEMO_5", "kind": "trap", "points": [13.076, 15.308, 16, 16]}
+      ]
+    },
+    "glucose": {
+      "control_name": "_glucose",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 0.922667, 3.898667]},
+        {"name": "DEMO_2", "kind": "tri", "points": [1.434667, 5.333333, 9.232]},
+        {"name": "DEMO_3", "kind": "tri", "points": [6.768, 10.666667, 14.565333]},
+        {"name": "DEMO_4", "kind": "trap", "points": [12.101333, 15.077333, 16, 16]}
+      ]
+    },
+    "head_buttons": {
+      "control_name": "_head_buttons",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "body_buttons": {
+      "control_name": "_body_buttons",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "head_buttons_frequency": {
+      "control_name": "_head_buttons_frequency",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "flashlights_frequency": {
+      "control_name": "_flashlights_frequency",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "mood": {
+      "control_name": "mood",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 0.692, 2.924]},
+        {"name": "DEMO_2", "kind": "tri", "points": [1.076, 4.0, 6.924]},
+        {"name": "DEMO_3", "kind": "tri", "points": [5.076, 8.0, 10.924]},
+        {"name": "DEMO_4", "kind": "tri", "points": [9.076, 12.0, 14.924]},
+        {"name": "DEMO_5", "kind": "trap", "points": [13.076, 15.308, 16, 16]}
+      ]
+    },
+    "alertness": {
+      "control_name": "alertness",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    },
+    "interest": {
+      "control_name": "interest",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 0.692, 2.924]},
+        {"name": "DEMO_2", "kind": "tri", "points": [1.076, 4.0, 6.924]},
+        {"name": "DEMO_3", "kind": "tri", "points": [5.076, 8.0, 10.924]},
+        {"name": "DEMO_4", "kind": "tri", "points": [9.076, 12.0, 14.924]},
+        {"name": "DEMO_5", "kind": "trap", "points": [13.076, 15.308, 16, 16]}
+      ]
+    },
+    "affective": {
+      "control_name": "affective",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 0.922667, 3.898667]},
+        {"name": "DEMO_2", "kind": "tri", "points": [1.434667, 5.333333, 9.232]},
+        {"name": "DEMO_3", "kind": "tri", "points": [6.768, 10.666667, 14.565333]},
+        {"name": "DEMO_4", "kind": "trap", "points": [12.101333, 15.077333, 16, 16]}
+      ]
+    },
+    "expectancy": {
+      "control_name": "expectancy",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 2.768, 11.696]},
+        {"name": "DEMO_2", "kind": "trap", "points": [4.304, 13.232, 16, 16]}
+      ]
+    },
+    "body_speed": {
+      "control_name": "body_speed",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 0.692, 2.924]},
+        {"name": "DEMO_2", "kind": "tri", "points": [1.076, 4.0, 6.924]},
+        {"name": "DEMO_3", "kind": "tri", "points": [5.076, 8.0, 10.924]},
+        {"name": "DEMO_4", "kind": "tri", "points": [9.076, 12.0, 14.924]},
+        {"name": "DEMO_5", "kind": "trap", "points": [13.076, 15.308, 16, 16]}
+      ]
+    },
+    "general_state": {
+      "control_name": "general_state",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 0.461333, 1.949333]},
+        {"name": "DEMO_2", "kind": "tri", "points": [0.717333, 2.666667, 4.616]},
+        {"name": "DEMO_3", "kind": "tri", "points": [3.384, 5.333333, 7.282667]},
+        {"name": "DEMO_4", "kind": "tri", "points": [6.050667, 8.0, 9.949333]},
+        {"name": "DEMO_5", "kind": "tri", "points": [8.717333, 10.666667, 12.616]},
+        {"name": "DEMO_6", "kind": "tri", "points": [11.384, 13.333333, 15.282667]},
+        {"name": "DEMO_7", "kind": "trap", "points": [14.050667, 15.538667, 16, 16]}
+      ]
+    },
+    "heartbeat": {
+      "control_name": "heartbeat",
+      "universe": [0, 17],
+      "terms": [
+        {"name": "DEMO_1", "kind": "trap", "points": [0, 0, 1.384, 5.848]},
+        {"name": "DEMO_2", "kind": "tri", "points": [2.152, 8.0, 13.848]},
+        {"name": "DEMO_3", "kind": "trap", "points": [10.152, 14.616, 16, 16]}
+      ]
+    }
+  },
+  "input_aliases": {
+    "mood_input": {"source": "mood", "control_name": "_mood"},
+    "alertness_input": {"source": "alertness", "control_name": "_alertness"},
+    "interest_input": {"source": "interest", "control_name": "_interest"},
+    "affective_input": {"source": "affective", "control_name": "_affective"},
+    "expectancy_input": {"source": "expectancy", "control_name": "_expectancy"}
+  },
+  "rules": {
+    "mood": {
+      "output": "mood",
+      "dimensions": [["battery", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["mood", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4", "DEMO_5"]], ["antennas", ["DEMO_1", "DEMO_2", "DEMO_3"]]],
+      "default": "DEMO_3",
+      "overrides": []
+    },
+    "alertness": {
+      "output": "alertness",
+      "dimensions": [["glucose", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4"]], ["alertness", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["light", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4", "DEMO_5"]]],
+      "default": "DEMO_2",
+      "overrides": []
+    },
+    "interest": {
+      "output": "interest",
+      "dimensions": [["interest", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4", "DEMO_5"]], ["speech", ["DEMO_1", "DEMO_2", "DEMO_3"]]],
+      "default": "DEMO_3",
+      "overrides": []
+    },
+    "expectancy": {
+      "output": "expectancy",
+      "dimensions": [["expectancy", ["DEMO_1", "DEMO_2"]], ["antennas_frequency", ["DEMO_1", "DEMO_2"]]],
+      "default": "DEMO_2",
+      "overrides": []
+    },
+    "body_speed": {
+      "output": "body_speed",
+      "dimensions": [["interest", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4", "DEMO_5"]], ["mood", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4", "DEMO_5"]]],
+      "default": "DEMO_3",
+      "overrides": []
+    },
+    "heartbeat": {
+      "output": "heartbeat",
+      "dimensions": [["alertness", ["DEMO_1", "DEMO_2", "DEMO_3"]]],
+      "default": "DEMO_2",
+      "overrides": []
+    },
+    "general_state": {
+      "output": "general_state",
+      "dimensions": [["affective", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4"]], ["expectancy", ["DEMO_1", "DEMO_2"]], ["alertness", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["mood", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4", "DEMO_5"]]],
+      "default": "DEMO_4",
+      "overrides": []
+    },
+    "affective_head": {
+      "output": "affective",
+      "dimensions": [["head_buttons", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["head_buttons_frequency", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["flashlights_frequency", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["affective", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4"]]],
+      "default": "DEMO_3",
+      "overrides": []
+    },
+    "affective_body": {
+      "output": "affective",
+      "dimensions": [["flashlights_frequency", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["head_buttons_frequency", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["body_buttons", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["affective", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4"]]],
+      "default": "DEMO_3",
+      "overrides": []
+    },
+    "affective_null": {
+      "output": "affective",
+      "dimensions": [["flashlights_frequency", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["head_buttons_frequency", ["DEMO_1", "DEMO_2", "DEMO_3"]], ["affective", ["DEMO_1", "DEMO_2", "DEMO_3", "DEMO_4"]]],
+      "default": "DEMO_3",
+      "overrides": []
+    }
+  }
+}
