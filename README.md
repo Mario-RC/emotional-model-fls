@@ -42,6 +42,9 @@ The public repository intentionally excludes:
 The demo model is useful for development and integration tests, but it is not
 the original emotional model.
 
+If you need access to project-specific data, rule tables or calibration values,
+please request them privately from the project maintainer.
+
 ## Install
 
 ```bash
