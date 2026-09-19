@@ -42,6 +42,9 @@ The public repository intentionally excludes:
 The demo model is useful for development and integration tests, but it is not
 the original emotional model.
 
+If you need access to project-specific data, rule tables or calibration values,
+please request them privately from the project maintainer.
+
 ## Install
 
 ```bash
@@ -115,3 +118,8 @@ If you maintain a private calibrated model, keep it outside this public repo.
 Publishing a `.gitignore` is not enough after a file has been committed. Build
 the public repository first, verify it contains only demo data, and then create
 the first Git commit.
+
+## License
+
+The public code and documentation in this repository are licensed under the
+[Apache License 2.0](LICENSE).
