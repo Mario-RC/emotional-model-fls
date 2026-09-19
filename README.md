@@ -3,8 +3,9 @@
 A public-safe fuzzy-logic framework for building customizable emotional models.
 
 This repository publishes the runtime, fuzzy engine, configuration loader and a
-synthetic toy model. It does not publish the private rule tables or calibrated
-membership functions used by the original model.
+synthetic toy model. The original rules, Fuzzy Inference System (FIS), membership
+functions and variable values are private and available only on request from the
+project owner.
 
 ![Emotional model architecture](docs/model_architecture.png)
 
@@ -35,15 +36,18 @@ The public repository intentionally excludes:
 
 - Real fuzzy rule tables.
 - Real membership-function calibration values.
+- Real variable ranges, initial values, delays, weights and event thresholds.
 - Spreadsheet sources such as `emotional_model_fuzzy_logic_rules_v5.xlsx`.
 - Private experiment scripts and real experiment outputs.
 - Generated plots from the private model.
 
 The demo model is useful for development and integration tests, but it is not
-the original emotional model.
+the original emotional model. All bundled ranges and calibration parameters are
+fictitious; the demo uses arbitrary units from 0 to 16. The architecture diagram
+above describes the system presented in the paper and remains public.
 
-If you need access to project-specific data, rule tables or calibration values,
-please request them privately from the project maintainer.
+To request the original rules, FIS or variable values, contact the project owner
+privately. These research materials are not included in the public repository.
 
 ## Install
 
