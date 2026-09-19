@@ -1,0 +1,6 @@
+include examples/toy_emotional_model.yaml
+include docs/architecture.md
+include docs/how_to_build_your_model.md
+include docs/model_architecture.png
+include docs/ray_emotional_model.pdf
+include tests/conftest.py
