@@ -157,7 +157,7 @@ def _build_rules(
     elif "default" in raw_spec:
         rules = _rules_from_default_and_overrides(name, raw_spec, dimensions)
     elif "items" in raw_spec:
-        rules = _rules_from_items(name, raw_spec["items"])
+        rules = _rules_from_items(name, raw_spec["items"], dimensions)
     else:
         raise ConfigError(f"rules.{name} needs one of: table, default, items.")
 
@@ -185,6 +185,10 @@ def _parse_dimensions(
         key = str(item[0])
         if key not in variables:
             raise ConfigError(f"rules.{name} references unknown variable {key!r}.")
+        if key in dict(parsed):
+            raise ConfigError(f"rules.{name} repeats dimension {key!r}.")
+        if not isinstance(item[1], Sequence) or isinstance(item[1], (str, bytes)) or not item[1]:
+            raise ConfigError(f"rules.{name}.dimensions[{index}] needs a non-empty term list.")
         terms = tuple(str(term) for term in item[1])
         known_terms = {term.name for term in variables[key].terms}
         missing = sorted(set(terms) - known_terms)
@@ -213,13 +217,16 @@ def _rules_from_default_and_overrides(
             raise ConfigError(f"rules.{name}.overrides[{index}] must be a mapping.")
         output = _require_string(override, "then", f"rules.{name}.overrides[{index}]")
         raw_when = _require_mapping(override, "when")
+        _validate_conditions(name, raw_when, dimensions, allow_wildcards=True)
         for conditions in _expand_conditions(dimensions, raw_when):
             outputs[conditions] = output
 
     return tuple(rule(conditions, output) for conditions, output in outputs.items())
 
 
-def _rules_from_items(name: str, raw_items: Any) -> tuple[RuleSpec, ...]:
+def _rules_from_items(
+    name: str, raw_items: Any, dimensions: Sequence[tuple[str, Sequence[str]]],
+) -> tuple[RuleSpec, ...]:
     if not isinstance(raw_items, Sequence) or isinstance(raw_items, (str, bytes)):
         raise ConfigError(f"rules.{name}.items must be a list.")
 
@@ -228,9 +235,36 @@ def _rules_from_items(name: str, raw_items: Any) -> tuple[RuleSpec, ...]:
         if not isinstance(item, Mapping):
             raise ConfigError(f"rules.{name}.items[{index}] must be a mapping.")
         raw_when = _require_mapping(item, "when")
+        _validate_conditions(name, raw_when, dimensions, allow_wildcards=False)
         output = _require_string(item, "then", f"rules.{name}.items[{index}]")
         rules.append(rule(tuple((str(key), str(value)) for key, value in raw_when.items()), output))
     return tuple(rules)
+
+
+def _validate_conditions(
+    name: str,
+    raw_when: Mapping[str, Any],
+    dimensions: Sequence[tuple[str, Sequence[str]]],
+    *,
+    allow_wildcards: bool,
+) -> None:
+    known = dict(dimensions)
+    unknown = set(raw_when) - set(known)
+    if unknown:
+        raise ConfigError(f"rules.{name}.when references unknown dimensions: {sorted(map(str, unknown))}")
+    if not raw_when and not allow_wildcards:
+        raise ConfigError(f"rules.{name}.when needs at least one condition.")
+    for key, value in raw_when.items():
+        if value is None and allow_wildcards:
+            continue
+        if isinstance(value, str):
+            selected = [value]
+        elif allow_wildcards and isinstance(value, Sequence) and not isinstance(value, bytes):
+            selected = value
+        else:
+            raise ConfigError(f"rules.{name}.when.{key} has an invalid term selection.")
+        if not selected or any(not isinstance(term, str) or term not in known[key] for term in selected):
+            raise ConfigError(f"rules.{name}.when.{key} references unknown or empty terms.")
 
 
 def _expand_conditions(
