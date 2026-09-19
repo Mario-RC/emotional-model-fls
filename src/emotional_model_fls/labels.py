@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any
 
 from emotional_model_fls.example_specs import DEFAULT_SPECS
@@ -9,6 +10,8 @@ from emotional_model_fls.fuzzy_engine import TermSpec, VariableSpec
 
 
 def _require_non_negative(value: float, name: str) -> float:
+    if not isfinite(value):
+        raise ValueError(f"{name} must be finite, got {value!r}")
     if value < 0:
         raise ValueError(f"{name} must be non-negative, got {value!r}")
     return value
