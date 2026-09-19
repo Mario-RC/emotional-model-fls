@@ -10,6 +10,7 @@ The loader supports two rule styles:
 from __future__ import annotations
 
 import json
+import math
 from collections.abc import Mapping, Sequence
 from itertools import product
 from pathlib import Path
@@ -54,14 +55,15 @@ def _read_config(source: str | Path | Mapping[str, Any] | Any) -> Mapping[str, A
         import yaml  # type: ignore[import-not-found]
     except ModuleNotFoundError:
         try:
-            return json.loads(text)
+            data = json.loads(text)
         except json.JSONDecodeError as exc:
             raise ConfigError(
                 "PyYAML is required for non-JSON YAML files. Install the optional "
                 "config dependency or keep the config in JSON-compatible YAML."
             ) from exc
 
-    data = yaml.safe_load(text)
+    else:
+        data = yaml.safe_load(text)
     if not isinstance(data, Mapping):
         raise ConfigError("Config root must be a mapping.")
     return data
@@ -100,10 +102,12 @@ def _build_variable(key: str, raw_spec: Any) -> VariableSpec:
     universe = raw_spec.get("universe")
     if not _is_number_pair(universe):
         raise ConfigError(f"variables.{key}.universe must be a two-item numeric list.")
+    if any(value != int(value) for value in universe) or universe[1] - universe[0] < 2:
+        raise ConfigError(f"variables.{key}.universe needs integer bounds spanning at least two samples.")
 
     raw_terms = raw_spec.get("terms")
-    if not isinstance(raw_terms, Sequence) or isinstance(raw_terms, (str, bytes)):
-        raise ConfigError(f"variables.{key}.terms must be a list.")
+    if not isinstance(raw_terms, Sequence) or isinstance(raw_terms, (str, bytes)) or not raw_terms:
+        raise ConfigError(f"variables.{key}.terms must be a non-empty list.")
 
     terms = []
     for index, raw_term in enumerate(raw_terms):
@@ -114,6 +118,8 @@ def _build_variable(key: str, raw_spec: Any) -> VariableSpec:
         points = raw_term.get("points")
         if not isinstance(points, Sequence) or isinstance(points, (str, bytes)):
             raise ConfigError(f"variables.{key}.terms[{index}].points must be a list.")
+        if not all(_is_finite_number(point) for point in points):
+            raise ConfigError(f"variables.{key}.terms[{index}].points must contain finite numbers.")
         terms.append((name, kind, tuple(float(point) for point in points)))
 
     return VariableSpec(
@@ -306,8 +312,17 @@ def _is_number_pair(value: Any) -> bool:
         isinstance(value, Sequence)
         and not isinstance(value, (str, bytes))
         and len(value) == 2
-        and all(isinstance(item, (int, float)) for item in value)
+        and all(_is_finite_number(item) for item in value)
     )
+
+
+def _is_finite_number(value: Any) -> bool:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return False
+    try:
+        return math.isfinite(value)
+    except OverflowError:
+        return False
 
 
 def _constant_name(name: str) -> str:
@@ -322,4 +337,6 @@ def _term_spec(name: str, kind: str, points: tuple[float, ...]):
     expected_points = 3 if kind == "tri" else 4
     if len(points) != expected_points:
         raise ConfigError(f"{kind!r} membership functions need {expected_points} points.")
+    if points[0] >= points[-1] or any(left > right for left, right in zip(points, points[1:], strict=False)):
+        raise ConfigError(f"Membership function {name!r} needs ordered points with a non-zero span.")
     return TermSpec(name=name, kind=kind, points=points)

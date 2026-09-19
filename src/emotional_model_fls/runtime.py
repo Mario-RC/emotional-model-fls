@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import time
 from collections.abc import Mapping
 from dataclasses import asdict, dataclass
@@ -169,7 +170,9 @@ class EmotionalModel:
     @staticmethod
     def _validate_sensor_value(name: str, value: Any) -> None:
         minimum, maximum = SENSOR_RANGES[name]
-        if not isinstance(value, (int, float)):
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
             raise TypeError(f"{name} must be numeric, got {type(value).__name__}")
         if value < minimum or value > maximum:
             raise ValueError(f"{name} must be in [{minimum}, {maximum}], got {value!r}")
+        if not math.isfinite(value):
+            raise ValueError(f"{name} must be finite, got {value!r}")

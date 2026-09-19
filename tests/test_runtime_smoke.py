@@ -14,6 +14,18 @@ def test_runtime_step_returns_outputs():
     assert outputs.body_speed >= 0
 
 
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), -float("inf")])
+@pytest.mark.parametrize("shared", [False, True])
+def test_non_finite_sensor_values_are_rejected(value, shared):
+    model = EmotionalModel()
+    with pytest.raises(ValueError):
+        if shared:
+            model.shared_data["battery"] = value
+            model.update_from_shared_data()
+        else:
+            model.apply_inputs({"battery": value})
+
+
 def test_sensor_validation_rejects_out_of_range_values():
     model = EmotionalModel()
 
