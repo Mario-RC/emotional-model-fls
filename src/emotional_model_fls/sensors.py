@@ -18,6 +18,7 @@ SENSOR_FIELDS = (
     "left_body_button",
 )
 
+# Fictitious demo ranges in arbitrary units; research ranges are private.
 SENSOR_RANGES = {
     "battery": (0, 16),
     "right_antenna": (0, 16),

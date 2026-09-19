@@ -11,6 +11,7 @@ from emotional_model_fls.labels import (
 )
 
 
+# Weights, frequency scales and debounce values below are fictitious demo parameters.
 class FuzzyLogic(Expressions):
     """Run the emotional fuzzy subsystems and maintain derived sensor inputs."""
 

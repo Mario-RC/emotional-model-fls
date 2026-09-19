@@ -6,6 +6,7 @@ from typing import Any
 
 from emotional_model_fls.example_specs import DEFAULT_SPECS
 
+# All calibration values below are fictitious demonstration parameters.
 SENSOR_DEFAULTS = {
     "battery": 8,
     "light": 8,
