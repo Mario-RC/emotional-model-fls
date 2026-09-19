@@ -12,7 +12,9 @@ license-files = ["LICENSE"]
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.23",
+    "scipy>=1.10",
     "scikit-fuzzy>=0.4.2",
+    "networkx>=3.0",
 ]
 
 [project.optional-dependencies]
