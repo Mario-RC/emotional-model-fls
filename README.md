@@ -46,8 +46,9 @@ the original emotional model. All bundled ranges and calibration parameters are
 fictitious; the demo uses arbitrary units from 0 to 16. The architecture diagram
 above describes the system presented in the paper and remains public.
 
-To request the original rules, FIS or variable values, contact the project owner
-privately. These research materials are not included in the public repository.
+The original Fuzzy Inference System (FIS), including its rule base, membership
+functions, and calibrated parameters, is not included in this public repository.
+Access to these research materials may be requested directly from the project owner.
 
 ## Install
 
