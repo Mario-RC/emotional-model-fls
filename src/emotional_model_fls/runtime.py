@@ -167,9 +167,8 @@ class EmotionalModel:
         self.shared_data["heartbeat"] = outputs.heartbeat
         self.shared_data["body_speed"] = outputs.body_speed
 
-    @staticmethod
-    def _validate_sensor_value(name: str, value: Any) -> None:
-        minimum, maximum = SENSOR_RANGES[name]
+    def _validate_sensor_value(self, name: str, value: Any) -> None:
+        minimum, maximum = getattr(self.fuzzy_logic, "sensor_ranges", SENSOR_RANGES)[name]
         if isinstance(value, bool) or not isinstance(value, (int, float)):
             raise TypeError(f"{name} must be numeric, got {type(value).__name__}")
         if value < minimum or value > maximum:

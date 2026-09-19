@@ -101,6 +101,36 @@ rules:
 Full tables are supported for small models, but avoid publishing calibrated
 private matrices if those are part of your intellectual property.
 
+## Optional Runtime Settings
+
+The existing API and demo work without a `runtime` section. To use your own
+calibration, add any of these optional groups to the same JSON/YAML config:
+
+| Group | Keys and meaning |
+| --- | --- |
+| `sensor_ranges` | Raw sensor names, each mapped to an inclusive `[minimum, maximum]` pair |
+| `sensor_defaults` | Initial readings, keyed by raw sensor name |
+| `initial_states` | Initial feedback values for `mood`, `alertness`, `interest`, `affective`, `expectancy` |
+| `delays` | Non-negative smoothing constants for those internal states |
+| `sensor_weights` | Weights for the two antennas, three head buttons and two body buttons, using their raw sensor names |
+| `processing` | `antennas_frequency_time`, `head_buttons_frequency_time`, `flashlights_time`, `flashlights_threshold_value`, `flashlights_threshold`, `flashlights_debounce_steps`, `frequency_scale` |
+
+For `battery`, `speech`, `light` and `glucose`, sensor bounds automatically follow
+the variable universe: `[start, stop - 1]`. An explicit `sensor_ranges` entry may
+narrow those bounds. Raw antenna and button ranges otherwise keep their demo
+defaults because several raw sensors contribute to one fuzzy variable.
+
+Unspecified settings retain demo values. If a default sensor reading or initial
+state lies outside a customized range, its fallback is the midpoint of that
+range; explicit values outside their range are rejected. Window sizes must be
+positive integers, debounce steps a non-negative integer, and frequency scale
+positive. All supplied numbers must be finite. Unknown setting names are errors.
+
+Choose aggregation weights and frequency scales consistently with the universes
+of the derived inputs. Keep your research configuration outside the public
+repository; the original rules, FIS and variable values must be requested from
+the project owner.
+
 ## Required Public Runtime Keys
 
 The default runtime expects these variable keys:

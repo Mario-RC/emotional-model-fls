@@ -60,7 +60,9 @@ class FuzzyLogic(Expressions):
     def setAntennas(self, _right_antenna_value, _left_antenna_value):
         """Combine left and right antenna touches into the model input scale."""
 
-        return (_right_antenna_value * 0.5) + (_left_antenna_value * 0.5)
+        return (_right_antenna_value * self.sensor_weights["right_antenna"]) + (
+            _left_antenna_value * self.sensor_weights["left_antenna"]
+        )
 
     def setAntennasFrequency(self, _antennas_value):
         """Return antenna-touch frequency over a rolling window."""
@@ -70,7 +72,7 @@ class FuzzyLogic(Expressions):
             touches = sum(self.antennas_frequency_stack)
             self.antennas_frequency_current_value = (
                 touches / self.antennas_frequency_time
-            ) * 16
+            ) * self.frequency_scale
             self.antennas_frequency_count = 0
         else:
             self.antennas_frequency_count += 1
@@ -79,8 +81,10 @@ class FuzzyLogic(Expressions):
     def setHeadButtons(self, _front_button_value, _right_ear_button_value, _left_ear_button_value):
         """Combine head-button inputs into the model input scale."""
 
-        return (_front_button_value * 0.25) + (_right_ear_button_value * 0.25) + (
-            _left_ear_button_value * 0.25
+        return (_front_button_value * self.sensor_weights["front_button"]) + (
+            _right_ear_button_value * self.sensor_weights["right_ear_button"]
+        ) + (
+            _left_ear_button_value * self.sensor_weights["left_ear_button"]
         )
 
     def setHeadButtonsFrequency(self, _head_buttons_value):
@@ -94,12 +98,14 @@ class FuzzyLogic(Expressions):
         else:
             self.head_buttons_frequency_count += 1
         presses = sum(self.head_buttons_frequency_stack)
-        return (presses / self.head_buttons_frequency_time) * 16
+        return (presses / self.head_buttons_frequency_time) * self.frequency_scale
 
     def setBodyButton(self, _right_body_button_value, _left_body_button_value):
         """Combine left and right body-button inputs into the model input scale."""
 
-        return (_right_body_button_value * 0.5) + (_left_body_button_value * 0.5)
+        return (_right_body_button_value * self.sensor_weights["right_body_button"]) + (
+            _left_body_button_value * self.sensor_weights["left_body_button"]
+        )
 
     def setFlashlightsFrequency(self, _lights_value):
         """Return detected light-flash frequency over a rolling window."""
@@ -115,7 +121,7 @@ class FuzzyLogic(Expressions):
         )
         self.flashlights_stack[self.flashlights_count] = detected_flash
         if detected_flash:
-            self.flashlights_debounce = 2
+            self.flashlights_debounce = self.flashlights_debounce_steps
         elif self.flashlights_debounce > 0:
             self.flashlights_debounce -= 1
 
@@ -125,4 +131,4 @@ class FuzzyLogic(Expressions):
             self.flashlights_count += 1
 
         flashes = sum(self.flashlights_stack)
-        return (flashes / self.flashlights_time) * 16
+        return (flashes / self.flashlights_time) * self.frequency_scale
